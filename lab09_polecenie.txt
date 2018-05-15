@@ -1,0 +1,20 @@
+﻿robić testy z selenium
+
+przetestować wybraną aplikację webową z użyciem IDE oraz web driver
+
+książka do selenium z 2014
+
+pościągać wszystko do virtualenv
+driver do firefox
+
+selektory xpath
+
+wykorzystać selenium do przetestowania wybranej aplikacji webowej
+
+web driver:
+napisać test sprawdzajacy, czy przy ponownym wywołaniu testu otrzyma się te same rezultaty
+
+maja pojawić się:
+- testy regresji (regresywne?) - spr. czy apka odpowiada tak samo, np wyniki searcha mają być takie same, zapisywać historię i porównywac wyniki z historią:
+np diffy na fragmentach tekstu, generowanie funkcji skrótu (porównywanie haszów)
+- 

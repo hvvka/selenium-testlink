@@ -5,16 +5,18 @@ from selenium.webdriver.common.keys import Keys
 
 
 class PythonOrg(unittest.TestCase):
+    """ Test cases for web page 'python.org' """
+
     grail_results = ""
 
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = "https://www.katalon.com/"
         self.verificationErrors = []
         self.accept_next_alert = True
 
     def test_documentation(self):
+        """ Tests documentation section and its search result for 'selenium' """
         driver = self.driver
         driver.get("https://www.python.org/")
         self.assertEqual("Welcome to Python.org", driver.title)
@@ -25,10 +27,10 @@ class PythonOrg(unittest.TestCase):
         driver.find_element_by_name("q").send_keys("selenium")
         driver.find_element_by_name("q").send_keys(Keys.ENTER)
         result = driver.find_element_by_xpath("//div[@id='search-results']/p").text
-        self.assertEqual(result,
-                         driver.find_element_by_xpath("//div[@id='search-results']/p").text)
+        self.assertEqual(result, driver.find_element_by_xpath("//div[@id='search-results']/p").text)
 
     def test_events(self):
+        """ Tests events section """
         driver = self.driver
         driver.get("https://www.python.org/")
         driver.find_element_by_link_text("Events").click()
@@ -40,6 +42,7 @@ class PythonOrg(unittest.TestCase):
                          driver.find_element_by_xpath("//div[@id='content']/div/section/div/div/ul/li/p/time").text)
 
     def test_list(self):
+        """ Tests searching from main page with 'grail' keyword and saving the searching results """
         global grail_results
         driver = self.driver
         driver.get("https://www.python.org/")
@@ -52,6 +55,7 @@ class PythonOrg(unittest.TestCase):
         grail_results = driver.find_element_by_xpath("//div[@id='content']/div/section/form/ul/li[6]/p").text
 
     def test_list_again(self):
+        """ Tests searching from main page with 'grail' keyword and compares the results with the previous test """
         driver = self.driver
         driver.get("https://www.python.org/")
         driver.find_element_by_id("id-search-field").click()
@@ -64,6 +68,7 @@ class PythonOrg(unittest.TestCase):
         self.assertEqual(grail_results, results)
 
     def test_search(self):
+        """ Tests searching from main page with 'monty' and checks few first results """
         driver = self.driver
         driver.get("https://www.python.org/")
         driver.find_element_by_id("id-search-field").click()
@@ -88,7 +93,7 @@ class PythonOrg(unittest.TestCase):
 
     def close_alert_and_get_its_text(self):
         try:
-            alert = self.driver.switch_to_alert()
+            alert = self.driver.switch_to.alert()
             alert_text = alert.text
             if self.accept_next_alert:
                 alert.accept()

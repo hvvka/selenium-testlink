@@ -11,5 +11,5 @@ setup(
     author='Hanna Grodzicka',
     author_email='226154@student.pwr.edu.pl',
     url='https://github.com/hvvka/selenium',
-    packages=find_packages(), install_requires=['selenium']
+    packages=find_packages(), install_requires=['selenium', 'TestLink-API-Python-client']
 )

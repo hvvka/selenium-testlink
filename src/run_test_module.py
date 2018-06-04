@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from pprint import pprint
 from unittest import (
     TestLoader,
@@ -7,7 +8,6 @@ from unittest import (
 
 import testlink
 
-# import subprocess
 from test_module import *
 
 # args = ["python", "test_module.py"]
@@ -75,7 +75,7 @@ class JsonTestResult(TextTestResult):
 
 
 if __name__ == '__main__':
-    # redirector default output of unittest to /dev/null
+    # redirect default output of unittest to /dev/null
     with open(os.devnull, 'w') as null_stream:
         # new a runner and overwrite resultclass of runner
         runner = TextTestRunner(stream=null_stream)
@@ -90,7 +90,7 @@ if __name__ == '__main__':
         # print json output
         pprint(result.jsonify())
 
-        TESTLINK_API_PYTHON_SERVER_URL = "http://192.168.8.134/lib/api/xmlrpc/v1/xmlrpc.php"
+        TESTLINK_API_PYTHON_SERVER_URL = "http://192.168.43.83/lib/api/xmlrpc/v1/xmlrpc.php"
         TESTLINK_API_PYTHON_DEVKEY = "e5d71d849a10dd9722437d407f79c549"
 
         # tls = testlink.TestLinkHelper( TESTLINK_API_PYTHON_SERVER_URL, TESTLINK_API_PYTHON_DEVKEY).connect(testlink.TestlinkAPIClient)
@@ -103,10 +103,17 @@ if __name__ == '__main__':
         print(tc_info)
         tc_info = tls.getProjectTestPlans('1')
         print("Plan ID: %s" % tc_info)
-        # tls.reportTCResult(4, 2, 'SampleBuild', 'f', 'some notes', user='user', platformid='1')
-        tls.reportTCResult(None, 7, None, 'p', 'some notes', guess=True,
+        # tls.reportTCResult(4, 7, 'Build', 'f', 'some notes', user='user', platformid='1')
+
+        test_result = 'p'
+        if result.jsonify()["TestSimple"]["error"]:
+            test_result = 'f'
+        print(test_result)
+
+        tls.reportTCResult(None, 7, None, test_result, 'some notes', guess=True,
                            testcaseexternalid='SE-1',
                            platformname='NewPlatform',
-                           execduration=3.9, timestamp='2018-06-02 10:30',
-                           steps=[{'step_number': 1, 'result': 'p', 'notes': 'result note for passed step 1'}]
+                           execduration=3.9, timestamp=str(datetime.now().strftime("%Y-%m-%d %H:%M")),
+                           steps=[{'step_number': 1, 'result': 'p', 'notes': 'result note for passed step 1'},
+                                  {'step_number': 2, 'result': 'p', 'notes': 'result note for passed step 2'}]
                            )

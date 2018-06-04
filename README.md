@@ -16,6 +16,7 @@ Add to the PATH: `export PATH=$PATH:/path/to/directory/of/downloaded/executable/
 
 Preferable path: `/usr/local/bin`
 
+--------------------
 
 ## Managing TestLink
 
@@ -60,15 +61,20 @@ Type the address in your browser to access login page:
 ```
 
 Enter:
+
 >Login: user
+
 >Password: ybrI6m4eODIX
 
 
 ### Create Test Project
 
 For this project it is:
+
 >Name: Selenium
+
 >Prefix: SE
+
 >Project description: Test cases for web page 'python.org'
 
 The rest is as default.
@@ -85,6 +91,7 @@ then hit toothed wheel (settings) and add button.
 Go to `Test Specification` tab, then fill `Filters`.
 
 >Test Case ID: Case
+
 >Test title: First test case
 
 
